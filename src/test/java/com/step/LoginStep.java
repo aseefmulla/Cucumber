@@ -43,9 +43,7 @@ public class LoginStep {
 		if(scenario.isFailed()) {
 			scenario.embed(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES), "image/png");
 		}
-		else {
-			scenario.embed(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES), "image/png");
-		}
+		
 	}
 	
 	
