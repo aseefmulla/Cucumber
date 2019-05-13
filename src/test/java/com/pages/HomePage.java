@@ -13,8 +13,8 @@ import org.openqa.selenium.support.FindBy;
 
 import com.utility.Utility;
 
-public class HomePage {
-	WebDriver driver;
+public class HomePage extends Utility {
+	
 	@FindBy(xpath = "//span[text()='Hello, Sign in']")
 	public WebElement signinbutton;
 	
@@ -22,50 +22,32 @@ public class HomePage {
 	public WebElement amazonloginpage;
 	
 
-	Utility util = new Utility();
-
-	public void OpenApplicaion() {
-		util.initialization();
+	public void OpenFacebook() {
+		initialization(prop.getProperty("facebookurl"));
 		
 	}
-
-	public boolean amazonpage() {
-		WebElement ele=driver.findElement(By.xpath("//a[text()='Your Amazon.in']"));
-		return  util.waitAndIsDisplayed(ele);
-		
-	}
+	
 	
 	public void click() {
-		WebElement signin= driver.findElement(By.xpath("//*[contains(text(),'Hello. Sign in')]"));
-		util.waitAndClick(signin);
+		WebElement signin= driver.findElement(By.id("loginbutton"));
+		waitAndClick(signin);
 		
 	}
-	public void signInAmazon(String value) {
+	public void sendUsername(String value) {
 		
-		util.sendKeys(signinbutton, value);
-	}
-	
-	public boolean amazonLoginPage() {
-		
-		WebElement ele1 = driver.findElement(By.xpath("//*[contains(text(),'Email or mobile phone number')]"));
-		WebElement ele2 = driver.findElement(By.xpath("//*[contains(text(),'Password')]"));
-		
-		System.out.println(ele1.getText()+" is Displayed");
-		System.out.println(ele2.getText()+" is Displayed");
-		
-		return(util.waitAndIsDisplayed(ele1) && util.waitAndIsDisplayed(ele2));
-		
-		
+		WebElement username=driver.findElement(By.id("email"));
+		username.sendKeys(value);
 	}
 	
-	public void selectValue(String value) {
-		WebElement locatorDropDown = driver.findElement(By.xpath("//*[@id=\"searchDropdownBox\"]"));
-		util.dropDown(locatorDropDown, value);
+public void sendPassword(String value) {
+		
+		WebElement username=driver.findElement(By.id("pass"));
+		username.sendKeys(value);
 	}
 
-	public void sendValues(String value) {
-		WebElement locatorsearch = driver.findElement(By.xpath("//*[@id=\"twotabsearchtextbox\"]"));
-		util.sendKeys(locatorsearch, value);
-		
-	}
+public boolean errorMsg() {
+	return driver.findElement(By.xpath("//a[@class='_42ft _4jy0 _62c3 _4jy4 _517h _51sy']")).isDisplayed();
+}
+	
+	
 }

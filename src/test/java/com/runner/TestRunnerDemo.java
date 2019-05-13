@@ -10,7 +10,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
-@CucumberOptions(strict = true, features = { "src/test/resources/Feature/Login.feature" }, plugin = { "pretty:STDOUT",
+@CucumberOptions(strict = true, features = { "src/test/resources/Feature/Amazon.feature" }, plugin = { "pretty:STDOUT",
 		"html:C:\\Users\\ASIFM\\Downloads\\MavenCucucmberSelenium\\test-output\\Reports\\cucumber-pretty",
 		"json:C:\\Users\\ASIFM\\Downloads\\MavenCucucmberSelenium\\test-output\\Reports\\cucumber-json\\cucumber.json",
 		"com.cucumber.listener.ExtentCucumberFormatter:C:\\Users\\ASIFM\\Downloads\\MavenCucucmberSelenium\\test-output\\Reports\\cucumber-extent\\report.html" }, monochrome = true, 

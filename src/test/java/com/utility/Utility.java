@@ -17,11 +17,13 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
 
 public class Utility {
 	public static WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
+	
 
 	public Utility() {
 		try {
@@ -36,7 +38,7 @@ public class Utility {
 		}
 	}
 
-	public static void initialization() {
+	public static void initialization(String url) {
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
@@ -63,7 +65,7 @@ public class Utility {
 		driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 
-		driver.get(prop.getProperty("url"));
+		driver.get(url);
 
 	}
 
@@ -94,6 +96,27 @@ public class Utility {
 		Select dropDown = new Select(locatorDropDown);
 		locatorDropDown.click();
 		dropDown.selectByVisibleText(value);
+	}
+	
+	public void hoverMouse(WebElement btn) {
+	Actions action = new Actions(driver);
+	action.moveToElement(btn).build().perform();
+	}
+	
+	public void swichAlert() {
+		driver.switchTo().alert();
+	}
+	
+	public void selectDropDown(WebElement locatorDropDown,String text) {
+		
+		Select dropDown = new Select(locatorDropDown);
+		locatorDropDown.click();
+		dropDown.selectByVisibleText(text);
+	}
+	public void pracitce(WebElement ele) {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		boolean a=wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(ele)) != null;
+		
 	}
 
 }
