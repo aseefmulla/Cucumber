@@ -1,11 +1,19 @@
 package com.utility;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -23,7 +31,6 @@ public class Utility {
 	public static WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
-	
 
 	public Utility() {
 		try {
@@ -54,7 +61,7 @@ public class Utility {
 			prefs.put("profile.default_content_setting_values.notifications", 2);
 			options.setExperimentalOption("prefs", prefs);
 			driver = new ChromeDriver(options);
-			//driver = new ChromeDriver();
+			// driver = new ChromeDriver();
 		} else if (browserName.equals("FF")) {
 			System.setProperty("webdriver.gecko.driver", "/Users/naveenkhunteta/Documents/SeleniumServer/geckodriver");
 			driver = new FirefoxDriver();
@@ -68,6 +75,10 @@ public class Utility {
 		driver.get(url);
 
 	}
+
+	/**
+	
+	 **/
 
 	public boolean waitAndIsDisplayed(WebElement ele) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -91,32 +102,85 @@ public class Utility {
 		ele.click();
 
 	}
-	public void dropDown(WebElement locatorDropDown,String value) {
-		
+
+	public void dropDown(WebElement locatorDropDown, String value) {
+
 		Select dropDown = new Select(locatorDropDown);
 		locatorDropDown.click();
 		dropDown.selectByVisibleText(value);
 	}
-	
+
 	public void hoverMouse(WebElement btn) {
-	Actions action = new Actions(driver);
-	action.moveToElement(btn).build().perform();
+		Actions action = new Actions(driver);
+		action.moveToElement(btn).build().perform();
 	}
-	
+
 	public void swichAlert() {
 		driver.switchTo().alert();
 	}
-	
-	public void selectDropDown(WebElement locatorDropDown,String text) {
-		
+
+	public void selectDropDown(WebElement locatorDropDown, String text) {
+
 		Select dropDown = new Select(locatorDropDown);
 		locatorDropDown.click();
 		dropDown.selectByVisibleText(text);
 	}
+
 	public void pracitce(WebElement ele) {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-		boolean a=wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(ele)) != null;
-		
+		boolean a = wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(ele)) != null;
+
+	}
+
+	public void swichWindow(int index) {
+		String windowId = null;
+		Set<String> windowids = driver.getWindowHandles();
+		Iterator<String> itr = windowids.iterator();
+		for (int i = 0; i < index; i++) {
+			windowId = itr.next();
+
+		}
+		driver.switchTo().window(windowId);
+
+	}
+
+	public void hover(WebElement ele) {
+		Actions act = new Actions(driver);
+		act.moveToElement(ele).build().perform();
+	}
+
+	public String getText(WebElement ele) {
+		return ele.getText();
+
+	}
+	public void uploadFileWithRobot (String imagePath) {
+        StringSelection stringSelection = new StringSelection(imagePath);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+ 
+        Robot robot = null;
+ 
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+ 
+        robot.delay(250);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.delay(150);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+	public String getColour(WebElement ele) {
+		String color=ele.getCssValue("color");
+		System.out.println("Color is: "+color);
+		return color;
 	}
 
 }

@@ -2,11 +2,14 @@ package com.runner;
 
 import java.io.File;
 
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 
 import com.cucumber.listener.Reporter;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
@@ -30,6 +33,14 @@ public class TestRunnerDemo extends AbstractTestNGCucumberTests {
 	Reporter.setSystemInfo("Environment", "Production");
 	Reporter.setTestRunnerOutput("Test Execution Cucumber Report");
 	}
+//	@Before
+//	public void setup1() {
+//		System.out.println("Test started: ");
+//	}
+//	@After
+//	public void setup2(ITestResult result) {
+//		System.out.println("Test ended: ");
+//	}
 	}
 
 //Strict : it will try to find the pending steps or missing steps, and fail if not find

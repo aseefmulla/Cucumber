@@ -60,7 +60,9 @@ public class AmazonHomePgae extends Utility {
 
 	public void clickOnRandomLink() {
 
-		List<WebElement> links = driver.findElements(By.xpath("//div[@class='s-result-list sg-row']/div"));
+		List<WebElement> links = driver.findElements(By.xpath("//div[@class='a-section a-spacing-none']/h2/a"));
+		//div[@class='a-section a-spacing-none']/h2/a
+		//div[@class='s-result-list sg-row']/div
 		int count = links.size();
 		System.out.println("Number of links are:" + count);
 
@@ -87,11 +89,24 @@ public class AmazonHomePgae extends Utility {
 
 	public void clickAddCartbutton() {
 		swichWindow(2);
-		driver.findElement(By.xpath("//a[@id='a-autoid-0-announce']")).click();
+		driver.findElement(By.cssSelector("input#add-to-cart-button")).click();
 	}
 
 	public boolean addedToCart() {
 		return driver.findElement(By.xpath("//*[@class='a-size-medium a-text-bold']")).isDisplayed();
 
 	}
+	
+	public String productDetails() {
+		WebElement pro=driver.findElement(By.xpath("//div[@class='a-box-inner']/img"));
+		hover(pro);
+		driver.switchTo().frame(1);
+		WebElement productText=driver.findElement(By.cssSelector("span.a-size-medium sc-product-title"));
+		String productTextis=getText(productText);
+		return productTextis;
+		
+	}
+	
+	
+	
 }
