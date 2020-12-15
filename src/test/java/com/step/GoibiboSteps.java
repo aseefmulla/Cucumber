@@ -1,5 +1,7 @@
 package com.step;
 
+import org.junit.Assert;
+
 import com.pages.GoibiboHomePage;
 
 import cucumber.api.java.en.Given;
@@ -22,7 +24,8 @@ public class GoibiboSteps extends GoibiboHomePage {
 	@Then("^goibibo login page displayed$")
 	public void goibibo_login_page_displayed() {
 
-		// Assert.assertEquals(true,goibiboPage());
+		//Assert.assertTrue(false);
+		
 		goibiboPage();
 
 	}
