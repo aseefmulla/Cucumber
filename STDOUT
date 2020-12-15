@@ -1,6 +1,40 @@
 Feature: Amazon application Test
 
-  Scenario: Login Amazon                                  # src/test/resources/Feature/Amazon.feature:4
+  #Scenario: Login Amazon
+  #Given user open browser and launch amazon application
+  #When user click on login button
+  #Then amazon login page displayed
+  #
+  #
+  #Scenario Outline: Search criteria
+  #Given user open browser and launch amazon application
+  #And user selects <dropdown>
+  #And user enter <searchvalue>
+  #When user click on submit button of amazon
+  #Then application display <searchvalue> result for search
+  #
+  #
+  #Examples:
+  #| dropdown | searchvalue |
+  #| Books    | freedom     |
+  Scenario Outline: Add to cart                           # src/test/resources/Feature/Amazon.feature:22
+    Given user open browser and launch amazon application
+    And user selects <dropdown>
+    And user enter <searchvalue>
+    And user click on submit button of amazon
+    And user clicks on random search result link
+    When user click on add to cartbutton
+    Then item is adde to cart
+    And swich back to main window
+
+    Examples: 
+
+  Scenario Outline: Add to cart                           # src/test/resources/Feature/Amazon.feature:34
     Given user open browser and launch amazon application # AmazonStep.user_open_browser_and_launch_amazon_application()
-    When user click on login button                       # AmazonStep.user_click_on_login_page()
-    Then amazon login page displayed                      # AmazonStep.amazon_login_page_displayed()
+    And user selects Electronics                          # AmazonStep.user_selects_Books(String)
+    And user enter headphones                             # AmazonStep.user_enter_freedom(String)
+    And user click on submit button of amazon             # AmazonStep.user_click_on_submit_button_of_amazon()
+    And user clicks on random search result link          # AmazonStep.user_clicks_on_random_search_result_link()
+    When user click on add to cartbutton                  # AmazonStep.user_click_on_add_to_cartbutton()
+    Then item is adde to cart                             # AmazonStep.item_is_adde_to_cart()
+    And swich back to main window                         # AmazonStep.swich_back_to_main_window()
